@@ -38,7 +38,7 @@ router.route('/signup').post(async(req,res)=>{
             await verify.save();
             const sub="G-drive confirmation e-mail";
             const link = await bcrypt.genSalt(4);
-            const href=`http://localhost:3000/verify/${users._id}`;
+            const href=`https://google-drive-ak-front-end.netlify.app/verify/${users._id}`;
             const message = `<b>Your one time password is : ${otp}</b><br/>
             Click the link below to verify your account<br/>
             <a href=${href}>${link} </a>`
@@ -72,7 +72,7 @@ router.route("/login").post(async(req,res)=>{
                     path: "/",
                     httpOnly: true,
                     secure: true,
-                    sameSite: "Strict",
+                    sameSite: "None",
                 })
                 res.send({"message":"green","_id":users._id});
             }else{
@@ -162,7 +162,7 @@ router.route("/forgotpassword/:email").get(async(req,res)=>{
         const users = await User.findOne({email})
         const salt = await bcrypt.genSalt(3);
         const sub ="G-drive password reset";
-        const href=`http://localhost:3000/passwordreset/${users._id}`;
+        const href=`https://google-drive-ak-front-end.netlify.app/passwordreset/${users._id}`;
         const message = `<b>Click the link below to reset your password : </b><br/>
         <a href=${href}>${salt} </a>`;
         //sending e-mail
@@ -257,7 +257,6 @@ router.route('/download/:userId').get(auth,async(request,response) =>{
                     Bucket:process.env.AWS_BUCKET_NAME,
                     Key:value.key,
                     Expires:120,
-
                 },(err,data)=>{
                     if(err){
                         response.status(402).send(err);

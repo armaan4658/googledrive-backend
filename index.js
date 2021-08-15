@@ -19,7 +19,7 @@ app.get('/',(request,response)=>{
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials:true,origin:"http://localhost:3000"}));
+app.use(cors({credentials:true,origin:"https://google-drive-ak-front-end.netlify.app"}));
 
 app.use("/user",router);
 app.listen(PORT,() => console.log("Server started at "+ PORT));

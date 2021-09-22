@@ -24,7 +24,7 @@ app.use(cookieParser());
 // app.use(cors({credentials:true,origin:allowedOrigins}));
 app.use(function (req, res, next) {
 
-  var allowedDomains = ['http://localhost:3000','https://google-drive-ak-front-end.netlify.app' ];
+  var allowedDomains = ['http://localhost:3000','https://google-drive-ak-front-end.netlify.app','https://main.d3729sisnrd7ao.amplifyapp.com' ];
   var origin = req.headers.origin;
   if(allowedDomains.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);

@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv/config" ;
 import {router} from './routes/user.js';
+import {otpRouter} from './routes/otp.js';
 import cookieParser from "cookie-parser"
 const app = express();
 const PORT = process.env.PORT||5000;
@@ -19,7 +20,9 @@ app.get('/',(request,response)=>{
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({credentials:true,origin:"https://google-drive-ak-front-end.netlify.app"}));
+const allowedOrigins = "https://google-drive-ak-front-end.netlify.app" || "http://localhost:3000" ;
+app.use(cors({credentials:true,origin:allowedOrigins}));
 
 app.use("/user",router);
+app.use("/otp",otpRouter);
 app.listen(PORT,() => console.log("Server started at "+ PORT));
